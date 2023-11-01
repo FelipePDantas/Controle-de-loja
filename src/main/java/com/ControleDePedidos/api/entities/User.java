@@ -1,16 +1,26 @@
 package com.ControleDePedidos.api.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
+
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
  private static final long SerialVersionUID = 1L;
-    private Long id;
-    private String nome;
-    private String email;
-    private String telefone;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(length = 100)
+    private String nome;
+    @Column(length = 50)
+    private String email;
+    @Column(length = 15)
+    private String telefone;
+    @Column(length = 15)
     private String senha;
 
     public User(){}
