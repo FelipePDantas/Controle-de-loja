@@ -1,4 +1,5 @@
 package com.ControleDePedidos.api.entities;
+import com.ControleDePedidos.api.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -18,6 +19,8 @@ public class Order implements Serializable {
 
     private String descricao;
 
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name ="cliente_id")
     private User cliente;
@@ -25,9 +28,10 @@ public class Order implements Serializable {
 
     public Order (){};
 
-    public Order(Long id, Instant momento, User cliente,String descricao) {
+    public Order(Long id, Instant momento,OrderStatus orderStatus, User cliente,String descricao) {
         this.id = id;
         this.momento = momento;
+        setOrderStatus(orderStatus);
         this.cliente = cliente;
         this.descricao = descricao;
     }
@@ -62,6 +66,16 @@ public class Order implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public OrderStatus getOrderStatus() throws IllegalAccessException {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null){
+        this.orderStatus = orderStatus.getCodigo();
+        }
     }
 
     @Override
