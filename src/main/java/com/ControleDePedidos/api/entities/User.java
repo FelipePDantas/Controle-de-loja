@@ -1,8 +1,7 @@
 package com.ControleDePedidos.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.apache.catalina.mapper.Mapper;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ public class User implements Serializable {
     @Column(length = 15)
     private String senha;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Order> orders = new ArrayList<>();
     public User(){}
