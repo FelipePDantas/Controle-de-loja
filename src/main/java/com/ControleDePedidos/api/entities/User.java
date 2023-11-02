@@ -1,8 +1,11 @@
 package com.ControleDePedidos.api.entities;
 
 import jakarta.persistence.*;
+import org.apache.catalina.mapper.Mapper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -23,6 +26,8 @@ public class User implements Serializable {
     @Column(length = 15)
     private String senha;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Order> orders = new ArrayList<>();
     public User(){}
 
     public User(Long id, String nome, String email, String telefone, String senha) {
@@ -71,6 +76,10 @@ public class User implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
