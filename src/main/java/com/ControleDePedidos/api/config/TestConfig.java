@@ -2,10 +2,12 @@ package com.ControleDePedidos.api.config;
 
 import com.ControleDePedidos.api.entities.Category;
 import com.ControleDePedidos.api.entities.Order;
+import com.ControleDePedidos.api.entities.Product;
 import com.ControleDePedidos.api.entities.User;
 import com.ControleDePedidos.api.entities.enums.OrderStatus;
 import com.ControleDePedidos.api.repositories.CategoryRepository;
 import com.ControleDePedidos.api.repositories.OrderRepository;
+import com.ControleDePedidos.api.repositories.ProductRepository;
 import com.ControleDePedidos.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -35,6 +40,16 @@ public class TestConfig implements CommandLineRunner {
         Category cat2 = new Category(null,"Livros");
         Category cat3 = new Category(null,"Computadores");
 
+        Product p1 = new Product(null,"Clean Code","Livro de código limpa.",100D,"felfle");
+        Product p2 = new Product(null,"Ps5","Video-game ultima geração.",5000D,"'-----'");
+        Product p3 = new Product(null,"Processador I10","Processadore ultra.",7000D,"looop");
+        Product p4 = new Product(null,"Clean Architecture","Livro de Arquitetura limpa.",102D,"saldl");
+        Product p5 = new Product(null,"Placa de Video","Placa de vídeo RTX 4060.",4500D,"----'-'");
+
+
+
+        productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+        categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 
 
         User u1 = new User(null,"Felipe","felipedev88@gmail.com","988682153","123456");
@@ -52,7 +67,7 @@ public class TestConfig implements CommandLineRunner {
 
         repository.saveAll(Arrays.asList(u1,u2,u3));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3,o4));
-        categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+
 
 
 
