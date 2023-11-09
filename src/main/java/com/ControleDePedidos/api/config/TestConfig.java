@@ -1,14 +1,8 @@
 package com.ControleDePedidos.api.config;
 
-import com.ControleDePedidos.api.entities.Category;
-import com.ControleDePedidos.api.entities.Order;
-import com.ControleDePedidos.api.entities.Product;
-import com.ControleDePedidos.api.entities.User;
+import com.ControleDePedidos.api.entities.*;
 import com.ControleDePedidos.api.entities.enums.OrderStatus;
-import com.ControleDePedidos.api.repositories.CategoryRepository;
-import com.ControleDePedidos.api.repositories.OrderRepository;
-import com.ControleDePedidos.api.repositories.ProductRepository;
-import com.ControleDePedidos.api.repositories.UserRepository;
+import com.ControleDePedidos.api.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -69,12 +65,15 @@ public class TestConfig implements CommandLineRunner {
         Order o4 = new Order(null, Instant.parse("2023-11-03T22:01:06Z"),OrderStatus.ESPERANDO_PAGAMENTO,u1,"hehehehehehehe");
 
 
-
-
-
         repository.saveAll(Arrays.asList(u1,u2,u3));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3,o4));
 
+        OrderItem oi1 = new OrderItem(o1,p1,2, p1.getPreco());
+        OrderItem oi2 = new OrderItem(o1,p3,3, p4.getPreco());
+        OrderItem oi3 = new OrderItem(o2,p3,5, p5.getPreco());
+        OrderItem oi4 = new OrderItem(o3,p5,8, p1.getPreco());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
 
 

@@ -1,6 +1,7 @@
 package com.ControleDePedidos.api.entities;
 
 import com.ControleDePedidos.api.entities.pk.OrdemItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -13,7 +14,7 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
-    private OrdemItemPK id;
+    private OrdemItemPK id = new OrdemItemPK();
 
     private Integer quantidade;
 
@@ -27,6 +28,7 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
         id.setProduct(product);
     }
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

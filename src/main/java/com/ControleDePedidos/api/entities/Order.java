@@ -1,11 +1,15 @@
 package com.ControleDePedidos.api.entities;
 import com.ControleDePedidos.api.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table( name = "tb_order")
 public class Order implements Serializable {
@@ -25,6 +29,8 @@ public class Order implements Serializable {
     @JoinColumn(name ="cliente_id")
     private User cliente;
 
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> itens = new HashSet<>();
 
     public Order (){};
 
@@ -77,6 +83,10 @@ public class Order implements Serializable {
         this.orderStatus = orderStatus.getCodigo();
         }
     }
+    public Set<OrderItem> getItens(){
+        return itens;
+    }
+
 
     @Override
     public boolean equals(Object o) {
