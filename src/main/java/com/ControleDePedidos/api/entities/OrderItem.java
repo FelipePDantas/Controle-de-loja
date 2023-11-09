@@ -59,4 +59,8 @@ public class OrderItem implements Serializable {
         this.preco = preco;
     }
 
+    public Double getSubToltal(){
+        return preco * quantidade;
+    }
+
 }
